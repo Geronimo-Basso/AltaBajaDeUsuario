@@ -23,7 +23,7 @@ public:
     ~Usuario(){
     }
     string imprimirUsuario(){
-        return identificador + " " + nombre + " " + apellido + " ";
+        return to_string(identificador) + " " + nombre + " " + apellido;
     }
 };
 
@@ -64,14 +64,23 @@ int main()
             }
             case '2': {
                 if (usuarios->size()>=1){
+                    cout << "----Usuarios----" << endl;
                     for (int i = 0; i < usuarios->size(); ++i) {
-                        cout << "Alumno " << i << "-" << usuarios->at(i)->imprimirUsuario() << endl; //Presentamos un listado de los profesores disponibles
+                        cout << usuarios->at(i)->imprimirUsuario() << endl; //Presentamos un listado de los alumnos disponibles
                     }
-                    cout << "Indique el alumno que desea borrar: " << endl;
-                    int alumn1;
-                    cin >> alumn1;
-                    //usuarios->erase(alumn1);
-                    delete usuarios->at(alumn1);
+                    cout << "Indique el codigo del usuario: " << endl;
+                    string stringCodigoAlumno;
+                    cin >> stringCodigoAlumno;
+                    int intCodigoAlumno;
+                    int elemento=0;
+                        intCodigoAlumno=stoi(stringCodigoAlumno);
+                        for(int i=0;i<usuarios->size();i++){
+                            if(intCodigoAlumno==(usuarios->at(i)->identificador)) {
+                                elemento=i;
+                            }
+                        };
+                    delete usuarios->at(elemento);
+                    usuarios->erase(usuarios->begin() + elemento);
                 }else{
                     cout << "Deben de existir al menos un alumno" << endl;
                 }
