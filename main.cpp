@@ -13,6 +13,7 @@ public:
     string nombre;
     string apellido;
     int identificador;
+
 public:
     Usuario(string nombre, string apellido, int identificador){
         Usuario::nombre=nombre;
@@ -20,40 +21,66 @@ public:
         Usuario::identificador=identificador;
     }
     ~Usuario(){
-        cout << "\n-------- Usuario " << nombre << " ha salido de el sistema--------\n";
+    }
+    string imprimirUsuario(){
+        return identificador + " " + nombre + " " + apellido + " ";
     }
 };
 
-class Sistema{
-public:
-    vector <Usuario> vec;
-};
 
 int main()
 {
-    Sistema sis;
+    vector<Usuario*> *usuarios=new vector<Usuario*>;
     bool condicion=true;
     char opcionMenu;
     while(condicion){
-        cout << "Bienvenido a nuestro sistema de altas y bajas de usuario" << endl;
+        cout << "-----Bienvenido a nuestro sistema de altas y bajas de usuario-----" << endl;
         cout << "1. Dar de alta un usuario" << "\n" << "2. Dar de baja un usuario" << "\n" << "3. Finalizar programa" <<endl;
         cin >> opcionMenu;
         switch (opcionMenu) {
-            case '1':
-                string nombre;
-                string apellido;
+            case '1': {
+                string nombre, apellido;
                 cout << "Introduzca el nombre del usuario: " << endl;
                 cin >> nombre;
                 cout << "Introduzca el apellido del usuario: " << endl;
                 cin >> apellido;
-                sis.vec.push_back(Usuario(nombre,apellido,0));
+                int contador = 0;
+                if (usuarios->size()==0){
+                    usuarios->push_back(new Usuario(nombre, apellido, 0));
+                }else {
+                    for (int i = 0; i < usuarios->size(); ++i) {
+                        contador++;
+                        if (usuarios->at(i)->identificador != i) {
+                            usuarios->push_back(new Usuario(nombre, apellido, i));
+                            break;
+                        } else if (contador >= usuarios->size()) {
+                            usuarios->push_back(new Usuario(nombre, apellido, contador));
+                            break;
+                        } else{
+                        }
+                    }
+                }
                 break;
-            case '2':
+            }
+            case '2': {
+                if (usuarios->size()>=1){
+                    for (int i = 0; i < usuarios->size(); ++i) {
+                        cout << "Alumno " << i << "-" << usuarios->at(i)->imprimirUsuario() << endl; //Presentamos un listado de los profesores disponibles
+                    }
+                    cout << "Indique el alumno que desea borrar: " << endl;
+                    int alumn1;
+                    cin >> alumn1;
+                    //usuarios->erase(alumn1);
+                    delete usuarios->at(alumn1);
+                }else{
+                    cout << "Deben de existir al menos un alumno" << endl;
+                }
                 break;
+            }
             case '3':
                 condicion=false;
                 break;
-                default:
+            default:
                 cout << "Error en el valor ingresado, intente otra vez";
                 break;
         }
