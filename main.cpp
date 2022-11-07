@@ -9,21 +9,21 @@ Para dar de baja un usuario, debe eliminarse usando el destructor del objeto usu
 using namespace std;
 
 class Usuario{
-public:
+public: //atributos de la clase Usuario
     string nombre;
     string apellido;
     int identificador;
 
 public:
-    Usuario(string nombre, string apellido, int identificador){
+    Usuario(string nombre, string apellido, int identificador){ //Constructor de la clase Usuario
         Usuario::nombre=nombre;
         Usuario::apellido=apellido;
         Usuario::identificador=identificador;
     }
-    ~Usuario(){
+    ~Usuario(){ //Destructor de Usuario
     }
     string imprimirUsuario(){
-        return to_string(identificador) + " " + nombre + " " + apellido;
+        return to_string(identificador) + " " + nombre + " " + apellido; //Devuelve un string con la informacion del usuario para luego mostrarlo por pantalla
     }
 };
 
@@ -45,15 +45,15 @@ int main()
                 cout << "Introduzca el apellido del usuario: " << endl;
                 cin >> apellido;
                 int contador = 0;
-                if (usuarios->size()==0){
+                if (usuarios->size()==0){ //si no hay ningun usuario creado, al primero se le asigna el id0
                     usuarios->push_back(new Usuario(nombre, apellido, 0));
                 }else {
                     for (int i = 0; i < usuarios->size(); ++i) {
                         contador++;
-                        if (usuarios->at(i)->identificador != i) {
+                        if (usuarios->at(i)->identificador != i) { // si hay un identificador sin asignar se le asigna al nuevo usuario
                             usuarios->push_back(new Usuario(nombre, apellido, i));
                             break;
-                        } else if (contador >= usuarios->size()) {
+                        } else if (contador >= usuarios->size()) { //si todos los identificadores estan asignados, se le da al usuario el ultimo
                             usuarios->push_back(new Usuario(nombre, apellido, contador));
                             break;
                         } else{
@@ -63,10 +63,10 @@ int main()
                 break;
             }
             case '2': {
-                if (usuarios->size()>=1){
+                if (usuarios->size()>=1){ //requiere que haya al menos un usuario creado
                     cout << "----Usuarios----" << endl;
                     for (int i = 0; i < usuarios->size(); ++i) {
-                        cout << usuarios->at(i)->imprimirUsuario() << endl; //Presentamos un listado de los alumnos disponibles
+                        cout << usuarios->at(i)->imprimirUsuario() << endl; //Presentamos un listado de los usuarios disponibles
                     }
                     cout << "Indique el codigo del usuario: " << endl;
                     string stringCodigoAlumno;
@@ -74,13 +74,13 @@ int main()
                     int intCodigoAlumno;
                     int elemento=0;
                         intCodigoAlumno=stoi(stringCodigoAlumno);
-                        for(int i=0;i<usuarios->size();i++){
+                        for(int i=0;i<usuarios->size();i++){ //recorre el vector de usuarios
                             if(intCodigoAlumno==(usuarios->at(i)->identificador)) {
-                                elemento=i;
+                                elemento=i; //si encontramos el identificador del usuario guardamos su posicion del vector para acceder luego
                             }
                         };
-                    delete usuarios->at(elemento);
-                    usuarios->erase(usuarios->begin() + elemento);
+                    delete usuarios->at(elemento); //eliminamos el usuario del free store
+                    usuarios->erase(usuarios->begin() + elemento); //eliminamos el usuario del vector para dejar el hueco limpio
                 }else{
                     cout << "Deben de existir al menos un alumno" << endl;
                 }
