@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.23"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Ejercicio_4",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Ejercicio_4::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Ejercicio_4-Debug-116fd60240e80c0d4422.json",
+					"name" : "Ejercicio_4",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/GeronimoBasso/Desktop/Tercer_Semestre/PEL/Semana-7/Actividad-Grupal-2/Ejercicio-4/cmake-build-debug",
+		"source" : "/Users/GeronimoBasso/Desktop/Tercer_Semestre/PEL/Semana-7/Actividad-Grupal-2/Ejercicio-4"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}
